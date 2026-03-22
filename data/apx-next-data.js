@@ -1,5 +1,2 @@
-const APX_NEXT_DATA = {
-  variants: ['XN', 'XE', 'NEXT'],
-  defaultVariant: 'XN',
-  categories: {}
-};
+// APX NEXT data - scaffold
+const APX_NEXT_DATA = {};
