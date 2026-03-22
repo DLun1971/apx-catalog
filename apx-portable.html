@@ -21,11 +21,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-siz
 .rpill.active{background:#185FA5;border-color:#2478c5;color:#fff;font-weight:600}
 #variant-strip{display:none;margin-top:10px}
 #variant-strip .vstrip-label{color:#7a9cc0;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
-.vpill{background:rgba(255,255,255,0.06);color:#a8c0d8;border:1px solid rgba(255,255,255,0.14);border-radius:14px;padding:3px 12px;cursor:pointer;font-size:11px;display:inline-block;margin-right:4px;transition:all .15s;user-select:none}
+.vpill{background:rgba(255,255,255,0.06);color:#a8c0d8;border:1px solid rgba(255,255,255,0.14);border-radius:14px;padding:3px 12px;cursor:pointer;font-size:11px;display:inline-block;margin-right:4px;margin-bottom:4px;transition:all .15s;user-select:none}
 .vpill:hover{background:rgba(255,255,255,0.13);color:#fff}
 .vpill.active{background:#1e6bb5;border-color:#2d82d2;color:#fff;font-weight:600}
 #content-area{background:#fff;margin:0}
-#cat-bar{background:#f0f4f8;border-bottom:1px solid #dde3eb;padding:8px 20px;display:flex;gap:6px;flex-wrap:wrap;display:none}
+#cat-bar{background:#f0f4f8;border-bottom:1px solid #dde3eb;padding:8px 20px;display:none;flex-wrap:wrap;gap:6px}
 .catpill{background:#fff;border:1px solid #c5cdd8;border-radius:14px;padding:4px 13px;font-size:12px;cursor:pointer;color:#445;transition:all .15s;user-select:none}
 .catpill:hover{background:#e8eef5;border-color:#185FA5}
 .catpill.active{background:#185FA5;border-color:#185FA5;color:#fff;font-weight:600}
@@ -56,7 +56,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-siz
 </head>
 <body>
 <div id="topbar">
-<div class="logo">Motorola Solutions &mdash; APX Portable Accessory Catalog</div>
+<div class="logo">Motorola Solutions — APX Portable Accessory Catalog</div>
 <div class="nav-links"><a href="#">Home</a><a href="#">My List</a></div>
 </div>
 <div id="radio-panel">
@@ -105,41 +105,39 @@ var APX_RADIOS = {
   "apx-7000":    { label:"APX 7000",    variants:["7000","7000XE"], dataVar:"APX_7000_DATA" },
   "apx-6000":    { label:"APX 6000",    variants:["6000","6000XE","5000"], dataVar:"APX_6000_DATA" },
   "apx-compact": { label:"APX Compact", variants:["4000","3000","2000","1000","1000i","900"], dataVar:"APX_COMPACT_DATA" },
-  "apx-srx2200": { label:"SRX2200",     variants:["SRX2200"], dataVar:"APX_SRX2200_DATA" }
+  "apx-srx2200": { label:"SRX2200",     variants:[], dataVar:"APX_SRX2200_DATA" }
 };
 var APX_CATS = ["RSM","Surveillance","Headsets","Tactical","Wireless","Batteries","Chargers","Carry","Antennas","Cables"];
 var COLS_BY_SECTION = {
-  "RSM":         ["desc","part","impres","intel_audio","ai_noise","windporting","noise_cancel","full_duplex","vol_ctrl","prog_btn","audio_jack","ip","hazloc"],
+  "RSM":["desc","part","impres","intel_audio","ai_noise","windporting","noise_cancel","full_duplex","vol_ctrl","prog_btn","audio_jack","ip","hazloc"],
   "Surveillance":["desc","part","impres","intel_audio","ai_noise","ear_type","mic_type","full_duplex","hazloc"],
-  "Headsets":    ["desc","part","impres","headset_type","ear_style","nrr_db","mic_type","hazloc"],
-  "Tactical":    ["desc","part","impres","hazloc"],
-  "Wireless":    ["desc","part","ear_type","mic_type","ptt","talk_time_hr","charge_time_hr","weight_g"],
-  "Batteries":   ["desc","part","impres","chem","capacity_mah","dims_mm","weight_g","hazloc","ip","op_temp"],
-  "Chargers":    ["desc","part","impres","chem","pwr_src","dims_mm","pockets"],
-  "Carry":       ["desc","part","material","belt_sz","swivel","display","d_rings"],
-  "Antennas":    ["desc","part","band","freq_mhz","len_cm","ant_type"],
-  "Cables":      ["desc","part"]
+  "Headsets":["desc","part","impres","headset_type","ear_style","nrr_db","mic_type","hazloc"],
+  "Tactical":["desc","part","impres","hazloc"],
+  "Wireless":["desc","part","ear_type","mic_type","ptt","talk_time_hr","charge_time_hr","weight_g"],
+  "Batteries":["desc","part","impres","chem","capacity_mah","dims_mm","weight_g","hazloc","ip","op_temp"],
+  "Chargers":["desc","part","impres","chem","pwr_src","dims_mm","pockets"],
+  "Carry":["desc","part","material","belt_sz","swivel","display","d_rings"],
+  "Antennas":["desc","part","band","freq_mhz","len_cm","ant_type"],
+  "Cables":["desc","part"]
 };
 var COL_LABELS = {
-  desc:"Description", part:"Part #", impres:"IMPRES", intel_audio:"Intel Audio",
-  ai_noise:"AI Noise", windporting:"Windporting", noise_cancel:"Noise Cancel",
-  full_duplex:"Full Duplex", vol_ctrl:"Vol Ctrl", prog_btn:"Prog Btn",
-  audio_jack:"Audio Jack", ip:"IP", hazloc:"HazLoc",
-  ear_type:"Ear Type", mic_type:"Mic Type", headset_type:"Type",
-  ear_style:"Ear Style", nrr_db:"NRR dB",
-  ptt:"PTT", talk_time_hr:"Talk (hr)", charge_time_hr:"Charge (hr)", weight_g:"Weight (g)",
-  chem:"Chemistry", capacity_mah:"mAh", dims_mm:"Dims (mm)", op_temp:"Op Temp",
-  pwr_src:"Power", pockets:"Pockets",
-  material:"Material", belt_sz:"Belt Sz", swivel:"Swivel", display:"Display", d_rings:"D-Rings",
-  band:"Band", freq_mhz:"Freq (MHz)", len_cm:"Length (cm)", ant_type:"Type"
+  desc:"Description",part:"Part #",impres:"IMPRES",intel_audio:"Intel Audio",
+  ai_noise:"AI Noise",windporting:"Windporting",noise_cancel:"Noise Cancel",
+  full_duplex:"Full Duplex",vol_ctrl:"Vol Ctrl",prog_btn:"Prog Btn",
+  audio_jack:"Audio Jack",ip:"IP",hazloc:"HazLoc",
+  ear_type:"Ear Type",mic_type:"Mic Type",headset_type:"Type",
+  ear_style:"Ear Style",nrr_db:"NRR dB",
+  ptt:"PTT",talk_time_hr:"Talk (hr)",charge_time_hr:"Charge (hr)",weight_g:"Weight (g)",
+  chem:"Chemistry",capacity_mah:"mAh",dims_mm:"Dims (mm)",op_temp:"Op Temp",
+  pwr_src:"Power",pockets:"Pockets",
+  material:"Material",belt_sz:"Belt Sz",swivel:"Swivel",display:"Display",d_rings:"D-Rings",
+  band:"Band",freq_mhz:"Freq (MHz)",len_cm:"Length (cm)",ant_type:"Type"
 };
 var BOOL_COLS = ["impres","intel_audio","ai_noise","windporting","noise_cancel","full_duplex","vol_ctrl","swivel","display","d_rings","ptt"];
-var BADGE_IP_COLS = ["ip"];
-var BADGE_HZ_COLS = ["hazloc"];
 var currentRadioKey = null;
 var currentVariant = null;
 var currentCat = "RSM";
-function selectRadio(el, key) {
+function selectRadio(el,key){
   document.querySelectorAll(".rpill").forEach(function(p){p.classList.remove("active");});
   el.classList.add("active");
   currentRadioKey = key;
@@ -158,7 +156,7 @@ function selectRadio(el, key) {
   buildCatBar();
   renderTables();
 }
-function buildVariantStrip(variants) {
+function buildVariantStrip(variants){
   var strip = document.getElementById("variant-strip");
   var pillsDiv = document.getElementById("variant-pills");
   pillsDiv.innerHTML = "";
@@ -167,20 +165,20 @@ function buildVariantStrip(variants) {
     var d = document.createElement("div");
     d.className = "vpill" + (v===currentVariant?" active":"");
     d.textContent = v;
-    d.setAttribute("data-v", v);
-    d.onclick = (function(vv){ return function(){ selectVariant(vv); }; })(v);
+    d.setAttribute("data-v",v);
+    d.onclick = (function(vv){return function(){selectVariant(vv);};})(v);
     pillsDiv.appendChild(d);
   }
   strip.style.display = "block";
 }
-function selectVariant(v) {
+function selectVariant(v){
   currentVariant = v;
   document.querySelectorAll(".vpill").forEach(function(p){
-    p.classList.toggle("active", p.getAttribute("data-v")===v);
+    p.classList.toggle("active",p.getAttribute("data-v")===v);
   });
   renderTables();
 }
-function buildCatBar() {
+function buildCatBar(){
   var bar = document.getElementById("cat-bar");
   bar.innerHTML = "";
   for(var i=0;i<APX_CATS.length;i++){
@@ -188,23 +186,23 @@ function buildCatBar() {
     var d = document.createElement("div");
     d.className = "catpill" + (c===currentCat?" active":"");
     d.textContent = c;
-    d.setAttribute("data-c", c);
-    d.onclick = (function(cc){ return function(){ selectCat(cc); }; })(c);
+    d.setAttribute("data-c",c);
+    d.onclick = (function(cc){return function(){selectCat(cc);};})(c);
     bar.appendChild(d);
   }
 }
-function selectCat(c) {
+function selectCat(c){
   currentCat = c;
   document.querySelectorAll(".catpill").forEach(function(p){
-    p.classList.toggle("active", p.getAttribute("data-c")===c);
+    p.classList.toggle("active",p.getAttribute("data-c")===c);
   });
   renderTables();
 }
-function getData() {
+function getData(){
   var radio = APX_RADIOS[currentRadioKey];
   return window[radio.dataVar] || [];
 }
-function matchesVariant(row) {
+function matchesVariant(row){
   if(!currentVariant) return true;
   if(!row.variants || row.variants.length === 0) return true;
   for(var i=0;i<row.variants.length;i++){
@@ -212,41 +210,37 @@ function matchesVariant(row) {
   }
   return false;
 }
-function renderCellVal(col, val) {
-  if(BOOL_COLS.indexOf(col) >= 0){
+function renderCellVal(col,val){
+  if(BOOL_COLS.indexOf(col)>=0){
     if(val===true||val===1||val==="1"||val==="yes") return "<span class=\"chk\">✔</span>";
     return "<span class=\"x\">—</span>";
   }
-  if(col==="ip"){
-    return val ? "<span class=\"badge badge-ip\">"+val+"</span>" : "<span class=\"x\">—</span>";
-  }
-  if(col==="hazloc"){
-    return val ? "<span class=\"badge badge-hz\">"+val+"</span>" : "<span class=\"x\">—</span>";
-  }
+  if(col==="ip") return val?"<span class=\"badge badge-ip\">"+val+"</span>":"<span class=\"x\">—</span>";
+  if(col==="hazloc") return val?"<span class=\"badge badge-hz\">"+val+"</span>":"<span class=\"x\">—</span>";
   if(val===null||val===undefined||val==="") return "<span class=\"x\">—</span>";
   return val;
 }
-function renderTables() {
+function renderTables(){
   if(!currentRadioKey) return;
   var radio = APX_RADIOS[currentRadioKey];
   var searchVal = (document.getElementById("search-box").value||"").toLowerCase();
   var allData = getData();
-  var cols = COLS_BY_SECTION[currentCat] || ["desc","part"];
+  var cols = COLS_BY_SECTION[currentCat]||["desc","part"];
   var rows = [];
   for(var i=0;i<allData.length;i++){
     var row = allData[i];
-    if((row.category||row.cat||"") !== currentCat) continue;
+    if((row.category||row.cat||"")!==currentCat) continue;
     if(!matchesVariant(row)) continue;
     if(searchVal){
-      var hay = ((row.desc||"")+" "+(row.part||"")).toLowerCase();
+      var hay=((row.desc||"")+" "+(row.part||"")).toLowerCase();
       if(hay.indexOf(searchVal)<0) continue;
     }
     rows.push(row);
   }
   var bc = document.getElementById("breadcrumb");
-  bc.innerHTML = "<span>"+radio.label+"</span> &rsaquo; " + currentCat + (currentVariant?" &rsaquo; "+currentVariant:"");
+  bc.innerHTML = "<span>"+radio.label+"</span> › "+currentCat+(currentVariant?" › "+currentVariant:"");
   var area = document.getElementById("tables-area");
-  if(rows.length === 0){
+  if(rows.length===0){
     area.innerHTML = "<div style=\"padding:40px 0;text-align:center;color:#889\">No accessories found for this selection.</div>";
     return;
   }
@@ -254,32 +248,28 @@ function renderTables() {
   html += "<div class=\"section-title\">"+currentCat+"</div>";
   html += "<table class=\"acc-table\"><thead><tr>";
   for(var ci=0;ci<cols.length;ci++){
-    var ckey = cols[ci];
-    var isCenter = BOOL_COLS.indexOf(ckey)>=0||ckey==="ip"||ckey==="hazloc";
-    html += "<th"+(isCenter?" class=\"center\"":" style=\"min-width:80px\"")+">"+( COL_LABELS[ckey]||ckey)+"</th>";
+    var ckey=cols[ci];
+    var isC=BOOL_COLS.indexOf(ckey)>=0||ckey==="ip"||ckey==="hazloc";
+    html += "<th"+(isC?" class=\"center\"":"")+">"+( COL_LABELS[ckey]||ckey)+"</th>";
   }
   html += "</tr></thead><tbody>";
   for(var ri=0;ri<rows.length;ri++){
-    var row = rows[ri];
+    var r=rows[ri];
     html += "<tr>";
     for(var ci2=0;ci2<cols.length;ci2++){
-      var ckey2 = cols[ci2];
-      var isCenter2 = BOOL_COLS.indexOf(ckey2)>=0||ckey2==="ip"||ckey2==="hazloc";
-      if(ckey2==="part"){
-        html += "<td class=\"part center\" onclick=\"copyPart(this)\">"+( row.part||"")+"</td>";
-      } else if(ckey2==="desc"){
-        html += "<td style=\"min-width:200px\">"+( row.desc||"")+"</td>";
-      } else {
-        html += "<td"+(isCenter2?" class=\"center\"":" ")+">"+renderCellVal(ckey2, row[ckey2])+"</td>";
-      }
+      var ck=cols[ci2];
+      var isC2=BOOL_COLS.indexOf(ck)>=0||ck==="ip"||ck==="hazloc";
+      if(ck==="part") html += "<td class=\"part center\" onclick=\"copyPart(this)\">"+( r.part||"")+"</td>";
+      else if(ck==="desc") html += "<td style=\"min-width:200px\">"+( r.desc||"")+"</td>";
+      else html += "<td"+(isC2?" class=\"center\"":"")+">"+renderCellVal(ck,r[ck])+"</td>";
     }
     html += "</tr>";
   }
   html += "</tbody></table></div>";
   area.innerHTML = html;
 }
-function copyPart(el) {
-  var t = el.textContent;
+function copyPart(el){
+  var t=el.textContent;
   if(navigator.clipboard){navigator.clipboard.writeText(t);}
   el.style.background="#d1fae5";
   setTimeout(function(){el.style.background="";},600);
