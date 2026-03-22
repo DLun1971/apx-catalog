@@ -50,11 +50,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-siz
 .badge-hz{background:#fef3c7;color:#92400e}
 .chk{color:#16a34a;font-size:13px}
 .x{color:#aaa;font-size:11px}
+.thumb{width:36px;height:36px;object-fit:contain;border-radius:3px;background:#f0f4f8}
+.thumb-empty{width:36px;height:36px;background:#f0f4f8;border-radius:3px;display:inline-block}
 #no-radio{padding:60px 20px;text-align:center;color:#778;font-size:14px}
 #no-radio h3{color:#0C2D5A;margin-bottom:8px}
 </style>
-</head>
-<body>
+</head><body>
 <div id="topbar">
 <div class="logo">Motorola Solutions — APX Portable Accessory Catalog</div>
 <div class="nav-links"><a href="#">Home</a><a href="#">My List</a></div>
@@ -77,10 +78,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-siz
 <div class="pill-row">
 <div class="rpill" onclick="selectRadio(this,'apx-srx2200')" data-key="apx-srx2200">SRX2200</div>
 </div>
-<div id="variant-strip">
-<div class="vstrip-label">Variant</div>
-<div id="variant-pills"></div>
-</div>
+<div id="variant-strip"><div class="vstrip-label">Variant</div><div id="variant-pills"></div></div>
 </div>
 <div id="content-area">
 <div id="cat-bar"></div>
@@ -98,42 +96,42 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-siz
 <script src="data/apx-srx2200-data.js"></script>
 <script>
 var APX_RADIOS = {
-  "apx-next":    { label:"APX NEXT",    variants:[], dataVar:"APX_NEXT_DATA" },
-  "apx-n70":     { label:"APX N70",     variants:[], dataVar:"APX_N70_DATA" },
-  "apx-n50":     { label:"APX N50",     variants:[], dataVar:"APX_N50_DATA" },
-  "apx-8000":    { label:"APX 8000",    variants:["8000","8000XE","8000H","8000HXE"], dataVar:"APX_8000_DATA" },
-  "apx-7000":    { label:"APX 7000",    variants:["7000","7000XE"], dataVar:"APX_7000_DATA" },
-  "apx-6000":    { label:"APX 6000",    variants:["6000","6000XE","5000"], dataVar:"APX_6000_DATA" },
-  "apx-compact": { label:"APX Compact", variants:["4000","3000","2000","1000","1000i","900"], dataVar:"APX_COMPACT_DATA" },
-  "apx-srx2200": { label:"SRX2200",     variants:[], dataVar:"APX_SRX2200_DATA" }
+  "apx-next":    {label:"APX NEXT",    variants:[],                                      dataVar:"APX_NEXT_DATA"},
+  "apx-n70":     {label:"APX N70",     variants:[],                                      dataVar:"APX_N70_DATA"},
+  "apx-n50":     {label:"APX N50",     variants:[],                                      dataVar:"APX_N50_DATA"},
+  "apx-8000":    {label:"APX 8000",    variants:["8000","8000XE","8000H","8000HXE"],     dataVar:"APX_8000_DATA"},
+  "apx-7000":    {label:"APX 7000",    variants:["7000","7000XE"],                       dataVar:"APX_7000_DATA"},
+  "apx-6000":    {label:"APX 6000",    variants:["6000","6000XE","5000"],                dataVar:"APX_6000_DATA"},
+  "apx-compact": {label:"APX Compact", variants:["4000","3000","2000","1000","1000i","900"], dataVar:"APX_COMPACT_DATA"},
+  "apx-srx2200": {label:"SRX2200",     variants:[],                                      dataVar:"APX_SRX2200_DATA"}
 };
 var APX_CATS = ["RSM","Surveillance","Headsets","Tactical","Wireless","Batteries","Chargers","Carry","Antennas","Cables"];
 var COLS_BY_SECTION = {
-  "RSM":["desc","part","impres","intel_audio","ai_noise","windporting","noise_cancel","full_duplex","vol_ctrl","prog_btn","audio_jack","ip","hazloc"],
-  "Surveillance":["desc","part","impres","intel_audio","ai_noise","ear_type","mic_type","full_duplex","hazloc"],
-  "Headsets":["desc","part","impres","headset_type","ear_style","nrr_db","mic_type","hazloc"],
-  "Tactical":["desc","part","impres","hazloc"],
-  "Wireless":["desc","part","ear_type","mic_type","ptt","talk_time_hr","charge_time_hr","weight_g"],
-  "Batteries":["desc","part","impres","chem","capacity_mah","dims_mm","weight_g","hazloc","ip","op_temp"],
-  "Chargers":["desc","part","impres","chem","pwr_src","dims_mm","pockets"],
-  "Carry":["desc","part","material","belt_sz","swivel","display","d_rings"],
-  "Antennas":["desc","part","band","freq_mhz","len_cm","ant_type"],
-  "Cables":["desc","part"]
+  RSM:          ["img","desc","part","impres","multi_mic","viqi","vol_ctrl","orange_btn","ch_ctrl","prog_btn","audio_jack","ip","hazloc","dims_mm"],
+  Surveillance: ["img","desc","part","impres","ear_type","mic_type","ptt","prog_btn","hazloc"],
+  Headsets:     ["img","desc","part","impres","headset_type","ear_style","nrr_db","mic_type","hazloc"],
+  Tactical:     ["img","desc","part","impres","hazloc"],
+  Wireless:     ["img","desc","part","ear_type","mic_type","ptt","talk_time_hr","charge_time_hr","weight_g"],
+  Batteries:    ["img","desc","part","impres","chem","capacity_mah","dims_mm","weight_g","hazloc","ip","op_temp"],
+  Chargers:     ["img","desc","part","impres","chem","pwr_src","dims_mm","pockets"],
+  Carry:        ["img","desc","part","material","belt_sz","swivel","d_rings"],
+  Antennas:     ["desc","part","band","freq_mhz","len_cm","ant_type"],
+  Cables:       ["desc","part"]
 };
 var COL_LABELS = {
-  desc:"Description",part:"Part #",impres:"IMPRES",intel_audio:"Intel Audio",
-  ai_noise:"AI Noise",windporting:"Windporting",noise_cancel:"Noise Cancel",
-  full_duplex:"Full Duplex",vol_ctrl:"Vol Ctrl",prog_btn:"Prog Btn",
-  audio_jack:"Audio Jack",ip:"IP",hazloc:"HazLoc",
-  ear_type:"Ear Type",mic_type:"Mic Type",headset_type:"Type",
-  ear_style:"Ear Style",nrr_db:"NRR dB",
-  ptt:"PTT",talk_time_hr:"Talk (hr)",charge_time_hr:"Charge (hr)",weight_g:"Weight (g)",
-  chem:"Chemistry",capacity_mah:"mAh",dims_mm:"Dims (mm)",op_temp:"Op Temp",
+  img:"",desc:"Description",part:"Part #",impres:"IMPRES",
+  multi_mic:"Multi-Mic",viqi:"ViQi",vol_ctrl:"Vol Ctrl",orange_btn:"Orange Btn",
+  ch_ctrl:"Ch Ctrl",prog_btn:"Prog Btn",audio_jack:"Audio Jack",
+  ip:"IP",hazloc:"HazLoc",dims_mm:"Dims (mm)",
+  ear_type:"Ear Type",mic_type:"Mic Type",ptt:"PTT",
+  headset_type:"Type",ear_style:"Ear Style",nrr_db:"NRR dB",
+  talk_time_hr:"Talk (hr)",charge_time_hr:"Charge (hr)",weight_g:"Weight (g)",
+  chem:"Chemistry",capacity_mah:"mAh",op_temp:"Op Temp",
   pwr_src:"Power",pockets:"Pockets",
-  material:"Material",belt_sz:"Belt Sz",swivel:"Swivel",display:"Display",d_rings:"D-Rings",
+  material:"Material",belt_sz:"Belt Sz",swivel:"Swivel",d_rings:"D-Rings",
   band:"Band",freq_mhz:"Freq (MHz)",len_cm:"Length (cm)",ant_type:"Type"
 };
-var BOOL_COLS = ["impres","intel_audio","ai_noise","windporting","noise_cancel","full_duplex","vol_ctrl","swivel","display","d_rings","ptt"];
+var BOOL_COLS = ["impres","multi_mic","viqi","vol_ctrl","orange_btn","ch_ctrl","audio_jack","swivel","d_rings","ptt"];
 var currentRadioKey = null;
 var currentVariant = null;
 var currentCat = "RSM";
@@ -163,7 +161,7 @@ function buildVariantStrip(variants){
   for(var i=0;i<variants.length;i++){
     var v = variants[i];
     var d = document.createElement("div");
-    d.className = "vpill" + (v===currentVariant?" active":"");
+    d.className = "vpill"+(v===currentVariant?" active":"");
     d.textContent = v;
     d.setAttribute("data-v",v);
     d.onclick = (function(vv){return function(){selectVariant(vv);};})(v);
@@ -184,7 +182,7 @@ function buildCatBar(){
   for(var i=0;i<APX_CATS.length;i++){
     var c = APX_CATS[i];
     var d = document.createElement("div");
-    d.className = "catpill" + (c===currentCat?" active":"");
+    d.className = "catpill"+(c===currentCat?" active":"");
     d.textContent = c;
     d.setAttribute("data-c",c);
     d.onclick = (function(cc){return function(){selectCat(cc);};})(c);
@@ -210,14 +208,20 @@ function getData(){
       var catName = cats[i];
       var rows = raw.categories[catName];
       for(var j=0;j<rows.length;j++){
-        var row = rows[j];
-        row.category = catName;
-        flat.push(row);
+        var rowObj = rows[j];
+        rowObj.category = catName;
+        flat.push(rowObj);
       }
     }
     return flat;
   }
   return [];
+}
+function getVariantsForRadio(){
+  var radio = APX_RADIOS[currentRadioKey];
+  var raw = window[radio.dataVar];
+  if(raw && raw.variants && raw.variants.length > 0) return raw.variants;
+  return radio.variants || [];
 }
 function matchesVariant(row){
   if(!currentVariant) return true;
@@ -228,6 +232,10 @@ function matchesVariant(row){
   return false;
 }
 function renderCellVal(col,val){
+  if(col==="img"){
+    if(val) return "<img class=\"thumb\" src=\""+val+"\" loading=\"lazy\">";
+    return "<span class=\"thumb-empty\"></span>";
+  }
   if(BOOL_COLS.indexOf(col)>=0){
     if(val===true||val===1||val==="1"||val==="yes") return "<span class=\"chk\">✔</span>";
     return "<span class=\"x\">—</span>";
@@ -246,7 +254,7 @@ function renderTables(){
   var rows = [];
   for(var i=0;i<allData.length;i++){
     var row = allData[i];
-    if((row.category||row.cat||"")!==currentCat) continue;
+    if(row.category !== currentCat) continue;
     if(!matchesVariant(row)) continue;
     if(searchVal){
       var hay=((row.desc||"")+" "+(row.part||"")).toLowerCase();
@@ -266,8 +274,8 @@ function renderTables(){
   html += "<table class=\"acc-table\"><thead><tr>";
   for(var ci=0;ci<cols.length;ci++){
     var ckey=cols[ci];
-    var isC=BOOL_COLS.indexOf(ckey)>=0||ckey==="ip"||ckey==="hazloc";
-    html += "<th"+(isC?" class=\"center\"":"")+">"+( COL_LABELS[ckey]||ckey)+"</th>";
+    var isC=BOOL_COLS.indexOf(ckey)>=0||ckey==="ip"||ckey==="hazloc"||ckey==="img";
+    html += "<th"+(isC?" class=\"center\"":"")+">"+( COL_LABELS[ckey]!==undefined?COL_LABELS[ckey]:ckey)+"</th>";
   }
   html += "</tr></thead><tbody>";
   for(var ri=0;ri<rows.length;ri++){
@@ -275,7 +283,7 @@ function renderTables(){
     html += "<tr>";
     for(var ci2=0;ci2<cols.length;ci2++){
       var ck=cols[ci2];
-      var isC2=BOOL_COLS.indexOf(ck)>=0||ck==="ip"||ck==="hazloc";
+      var isC2=BOOL_COLS.indexOf(ck)>=0||ck==="ip"||ck==="hazloc"||ck==="img";
       if(ck==="part") html += "<td class=\"part center\" onclick=\"copyPart(this)\">"+( r.part||"")+"</td>";
       else if(ck==="desc") html += "<td style=\"min-width:200px\">"+( r.desc||"")+"</td>";
       else html += "<td"+(isC2?" class=\"center\"":"")+">"+renderCellVal(ck,r[ck])+"</td>";
@@ -286,8 +294,7 @@ function renderTables(){
   area.innerHTML = html;
 }
 function copyPart(el){
-  var t=el.textContent;
-  if(navigator.clipboard){navigator.clipboard.writeText(t);}
+  if(navigator.clipboard) navigator.clipboard.writeText(el.textContent);
   el.style.background="#d1fae5";
   setTimeout(function(){el.style.background="";},600);
 }
