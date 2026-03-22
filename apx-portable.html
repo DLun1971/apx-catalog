@@ -200,7 +200,24 @@ function selectCat(c){
 }
 function getData(){
   var radio = APX_RADIOS[currentRadioKey];
-  return window[radio.dataVar] || [];
+  var raw = window[radio.dataVar];
+  if(!raw) return [];
+  if(Array.isArray(raw)) return raw;
+  if(raw.categories){
+    var flat = [];
+    var cats = Object.keys(raw.categories);
+    for(var i=0;i<cats.length;i++){
+      var catName = cats[i];
+      var rows = raw.categories[catName];
+      for(var j=0;j<rows.length;j++){
+        var row = rows[j];
+        row.category = catName;
+        flat.push(row);
+      }
+    }
+    return flat;
+  }
+  return [];
 }
 function matchesVariant(row){
   if(!currentVariant) return true;
