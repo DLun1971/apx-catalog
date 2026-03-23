@@ -324,7 +324,7 @@ function buildSectionsHTML(sections){
       html+="<tr style='cursor:pointer' onclick='showAccSidebar(this)' data-pn='"+pn+"' data-desc='"+desc.replace(/'/g,' ')+"'>";
       html+="<td>"+(thumbUrl?"<img src='"+thumbUrl+"' style='width:34px;height:34px;object-fit:contain;border-radius:4px;border:0.5px solid #e0e0e0'>":"<div class='img-box'></div>")+"</td>";
       html+="<td>"+desc+"</td>";
-      html+="<td class='pn' title='Click to copy' style='cursor:pointer' onclick="copyPN(this,'"+(pn||'')+"')">"+pn+"</td>";
+      html+="<td class='pn' title='Click to copy' style='cursor:pointer' onclick='copyPN(this)' data-pn='"+pn+"'>"+pn+"</td>";
       for(var ci2=0;ci2<cols.length;ci2++){
         var ck=cols[ci2].key||cols[ci2];
         var v=item[ck];
@@ -334,7 +334,7 @@ function buildSectionsHTML(sections){
         else if(ck==="hazloc") html+="<td>"+(v==="UL"?"<span class='spec-tag tag-ul'>UL</span>":v==="ATEX"?"<span class='spec-tag tag-atex'>ATEX</span>":"<span class='spec-tag tag-hz'>"+v+"</span>")+"</td>";
         else html+="<td>"+v+"</td>";
       }
-      html+="<td><input type='checkbox' class='row-cb'"+(inList?" check:pointer;width:14px;height:14px' type='checkbox' class='row-cb'"+(inList?" checked":"")+" onchange=\"toggleItem('"+(pn||'')+"',this.checked)\">";
+      html+="<td><input type='checkbox' class='row-cb'"+(inList?" checked":"")+" onchange='toggleItem(this)' data-pn='"+pn+"'></td>";
       html+="</tr>";
     }
     html+="</tbody></table>";
@@ -357,8 +357,10 @@ function restoreRadioSidebar(){document.getElementById("sidebar-acc").style.disp
 function openLightbox(src){document.getElementById("lightbox-img").src=src;document.getElementById("lightbox").classList.add("open");}
 function onSearchInput(){var q=document.getElementById("search-input").value;document.getElementById("search-clear").style.display=q?"inline":"none";render();}
 function clearSearch(){document.getElementById("search-input").value="";document.getElementById("search-clear").style.display="none";render();}
-function toggleItem(pn,checked){if(checked&&myList.indexOf(pn)<0)myList.push(pn);else if(!checked)myList=myList.filter(function(p){return p!==pn;});document.getElementById("mylist-count").textContent=myList.length;}
-function copyPN(el,pn){navigator.clipboard&&navigator.clipboard.writeText(pn);var orig=el.textContent;el.textContent="Copied!";el.style.color="#1D9E75";setTimeout(function(){el.textContent=orig;el.style.color="";},1200);}
+function toggleItem(el,checked){var pn=el?el.getAttribute("data-pn")||"":"";
+if(checked&&myList.indexOf(pn)<0)myList.push(pn);else if(!checked)myList=myList.filter(function(p){return p!==pn;});document.getElementById("mylist-count").textContent=myList.length;}
+function copyPN(el){var pn=el?el.getAttribute("data-pn")||el.textContent||"":"";
+navigator.clipboard&&navigator.clipboard.writeText(pn);var orig=el.textContent;el.textContent="Copied!";el.style.color="#1D9E75";setTimeout(function(){el.textContent=orig;el.style.color="";},1200);}
 function findItemByPN(pn){
   for(var ri=0;ri<ALL_RADIOS.length;ri++){
     var saved=currentRadioKey;currentRadioKey=ALL_RADIOS[ri].key;
