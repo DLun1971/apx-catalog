@@ -6,86 +6,119 @@
 <title>APX Portable Accessory Catalog</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:13px;background:#f4f6f9;color:#222}
-#topbar{background:#0C2D5A;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:48px;position:sticky;top:0;z-index:100}
-#topbar .logo{font-size:15px;font-weight:700;letter-spacing:.5px}
-#topbar .nav-links{display:flex;gap:16px}
-#topbar .nav-links a{color:#ccd9ea;text-decoration:none;font-size:12px}
-#topbar .nav-links a:hover{color:#fff}
-#radio-panel{background:#112240;padding:16px 20px 12px;border-bottom:3px solid #185FA5}
-.pill-group-label{color:#7a9cc0;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;margin-top:10px}
-.pill-group-label:first-child{margin-top:0}
-.pill-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px}
-.rpill{background:rgba(255,255,255,0.08);color:#ccd9ea;border:1px solid rgba(255,255,255,0.18);border-radius:20px;padding:5px 14px;cursor:pointer;font-size:12px;font-weight:500;transition:all .15s;user-select:none}
-.rpill:hover{background:rgba(255,255,255,0.15);color:#fff}
-.rpill.active{background:#185FA5;border-color:#2478c5;color:#fff;font-weight:600}
-#variant-strip{display:none;margin-top:10px}
-#variant-strip .vstrip-label{color:#7a9cc0;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
-.vpill{background:rgba(255,255,255,0.06);color:#a8c0d8;border:1px solid rgba(255,255,255,0.14);border-radius:14px;padding:3px 12px;cursor:pointer;font-size:11px;display:inline-block;margin-right:4px;margin-bottom:4px;transition:all .15s;user-select:none}
-.vpill:hover{background:rgba(255,255,255,0.13);color:#fff}
-.vpill.active{background:#1e6bb5;border-color:#2d82d2;color:#fff;font-weight:600}
-#content-area{background:#fff;margin:0}
-#cat-bar{background:#f0f4f8;border-bottom:1px solid #dde3eb;padding:8px 20px;display:none;flex-wrap:wrap;gap:6px}
-.catpill{background:#fff;border:1px solid #c5cdd8;border-radius:14px;padding:4px 13px;font-size:12px;cursor:pointer;color:#445;transition:all .15s;user-select:none}
-.catpill:hover{background:#e8eef5;border-color:#185FA5}
-.catpill.active{background:#185FA5;border-color:#185FA5;color:#fff;font-weight:600}
-#toolbar{display:none;align-items:center;padding:8px 20px;gap:12px;border-bottom:1px solid #dde3eb;background:#fafbfc}
-#breadcrumb{font-size:12px;color:#667;flex:1}
-#breadcrumb span{color:#185FA5;font-weight:500}
-#search-box{padding:5px 10px;border:1px solid #c5cdd8;border-radius:6px;font-size:12px;width:220px;outline:none}
-#search-box:focus{border-color:#185FA5}
-#tables-area{padding:0 20px 40px}
-.section-block{margin-top:24px}
-.section-title{font-size:13px;font-weight:700;color:#0C2D5A;border-bottom:2px solid #185FA5;padding-bottom:4px;margin-bottom:10px;text-transform:uppercase;letter-spacing:.4px}
-.acc-table{width:100%;border-collapse:collapse;font-size:12px}
-.acc-table th{background:#0C2D5A;color:#fff;padding:6px 10px;text-align:left;font-size:11px;font-weight:600;white-space:nowrap}
-.acc-table th.center,.acc-table td.center{text-align:center}
-.acc-table tr:nth-child(even){background:#f7f9fb}
-.acc-table tr:hover{background:#edf2f8}
-.acc-table td{padding:5px 10px;border-bottom:1px solid #e8ecf0;vertical-align:middle}
-.acc-table td.part{font-family:monospace;font-size:11px;color:#185FA5;white-space:nowrap;cursor:pointer}
-.acc-table td.part:hover{text-decoration:underline}
-.badge{display:inline-block;border-radius:4px;padding:1px 6px;font-size:10px;font-weight:600;white-space:nowrap}
-.badge-ip{background:#dbeafe;color:#1e40af}
-.badge-hz{background:#fef3c7;color:#92400e}
-.chk{color:#16a34a;font-size:13px}
-.x{color:#aaa;font-size:11px}
-.thumb{width:36px;height:36px;object-fit:contain;border-radius:3px;background:#f0f4f8}
-.thumb-empty{width:36px;height:36px;background:#f0f4f8;border-radius:3px;display:inline-block}
-#no-radio{padding:60px 20px;text-align:center;color:#778;font-size:14px}
-#no-radio h3{color:#0C2D5A;margin-bottom:8px}
+body{font-family:system-ui,sans-serif;background:#f5f5f5;min-height:100vh;overflow-y:auto}
+#topbar{background:#0C2D5A;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:100}
+#topbar-left{display:flex;align-items:center;gap:12px}
+#brand{color:#fff;font-size:15px;font-weight:500;letter-spacing:0.01em}
+#mylist-pill{display:flex;align-items:center;gap:7px;border:1px solid rgba(255,255,255,0.35);border-radius:20px;padding:5px 16px;cursor:pointer;color:#fff;font-size:12px;user-select:none}
+#mylist-pill:hover{background:rgba(255,255,255,0.1)}
+#whatsnew-pill:hover{background:rgba(255,255,255,0.1)}
+#mylist-count{background:rgba(255,255,255,0.2);border-radius:10px;padding:1px 7px;font-size:11px;color:#fff}
+@keyframes badge-pulse{0%,100%{transform:scale(1);background:rgba(255,255,255,0.2)}50%{transform:scale(1.25);background:#5DCAA5}}
+#whatsnew-count.pulsing{animation:badge-pulse 1.6s ease-in-out infinite;display:inline-block}
+#radio-panel{background:#112240;padding:14px 20px 14px}
+.panel-label{font-size:10px;font-weight:500;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px}
+.pill-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.rpill{padding:6px 16px;border-radius:20px;font-size:13px;cursor:pointer;border:1px solid rgba(255,255,255,0.3);background:transparent;color:#fff;user-select:none;transition:background 0.15s,border-color 0.15s}
+.rpill:hover{background:rgba(255,255,255,0.1)}
+.rpill.active{background:#185FA5;border-color:#185FA5;font-weight:500}
+.vpill{padding:4px 12px;border-radius:14px;font-size:11px;cursor:pointer;border:1px solid rgba(255,255,255,0.2);background:transparent;color:rgba(255,255,255,0.7);user-select:none;transition:all 0.15s;display:inline-block;margin-right:4px;margin-bottom:4px}
+.vpill:hover{background:rgba(255,255,255,0.1);color:#fff}
+.vpill.active{background:#1e6bb5;border-color:#2d82d2;color:#fff;font-weight:500}
+#variant-strip{display:none;padding:8px 0 0;border-top:1px solid rgba(255,255,255,0.08);margin-top:6px}
+#variant-info{display:none;padding:8px 0 0;border-top:1px solid rgba(255,255,255,0.08);margin-top:6px;font-size:11px;color:rgba(255,255,255,0.65);line-height:1.5}
+#content-area{background:#fff;border-top:3px solid #185FA5}
+#cat-bar{padding:10px 20px;display:flex;flex-wrap:wrap;gap:5px;border-bottom:0.5px solid #e0e0e0}
+.cpill{padding:4px 13px;border-radius:14px;font-size:12px;cursor:pointer;border:0.5px solid #ccc;color:#555;background:transparent;user-select:none;transition:all 0.15s}
+.cpill:hover{background:#f0f0f0}
+.cpill.active{background:#0C2D5A;border-color:#0C2D5A;color:#fff}
+#toolbar{padding:8px 20px;display:flex;align-items:center;gap:8px;border-bottom:0.5px solid #e0e0e0}
+#breadcrumb{font-size:12px;color:#777}
+#breadcrumb b{color:#222;font-weight:500}
+#table-area{padding:0 20px 40px}
+.sec-head{font-size:11px;font-weight:500;color:#888;text-transform:uppercase;letter-spacing:0.05em;padding:16px 0 6px;display:flex;align-items:center;gap:8px}
+.sec-count{font-weight:400;color:#bbb;text-transform:none;letter-spacing:0;font-size:11px}
+.no-items{font-size:13px;color:#aaa;padding:12px 0}
+table.acc-table{width:100%;border-collapse:collapse;font-size:12px}
+table.acc-table th{text-align:left;padding:7px 10px;border-bottom:1px solid #ddd;font-size:11px;font-weight:500;color:#888;white-space:nowrap;background:#fafafa}
+table.acc-table td{padding:8px 10px;border-bottom:0.5px solid #f0f0f0;color:#222;vertical-align:middle}
+table.acc-table tr:last-child td{border-bottom:none}
+table.acc-table tr:hover td{background:#f9f9f9}
+.img-box{width:34px;height:34px;background:#f0f0f0;border-radius:4px;border:0.5px solid #e0e0e0;flex-shrink:0}
+.pn{font-family:monospace;font-size:11px;color:#888}
+.chk-yes{color:#1D9E75;text-align:center;font-size:13px}
+.acc-table td{text-align:center}.acc-table td:nth-child(2){text-align:left}.acc-table td:nth-child(3){text-align:left}
+.chk-no{color:#ccc;text-align:center;font-size:13px}
+.row-cb{cursor:pointer;width:14px;height:14px}
+.spec-tag{display:inline-block;font-size:10px;padding:2px 5px;border-radius:6px;margin-left:3px;vertical-align:middle}
+.tag-ip{background:#E6F1FB;color:#0C447C}
+.tag-hz{background:#EAF3DE;color:#3B6D11}.tag-ul{background:#EAF3DE;color:#3B6D11}.tag-atex{background:#E6F1FB;color:#0C447C}
+#page-wrap{display:flex;align-items:stretch}
+#main-col{flex:1;min-width:0}
+#radio-sidebar{width:220px;flex-shrink:0;background:#fff;border-right:1px solid #e0e0e0;display:flex;flex-direction:column;align-items:center;padding:24px 16px;position:sticky;top:52px;height:calc(100vh - 52px);overflow:hidden}
+#sidebar-img{width:180px;height:180px;object-fit:contain;display:block}
+#sidebar-img.hidden{display:none}
+#sidebar-placeholder{width:180px;height:180px;background:#f5f5f5;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#ccc;font-size:12px}
+#sidebar-name{margin-top:16px;font-size:14px;font-weight:600;color:#0C2D5A;text-align:center}
+#sidebar-type{font-size:11px;color:#888;margin-top:4px;text-align:center}
+#lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.2);z-index:999;align-items:center;justify-content:center;cursor:pointer}
+#lightbox.open{display:flex}
+#lightbox img{max-width:50vw;max-height:50vh;object-fit:contain;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,0.5)}
 </style>
 </head><body>
+<div id="lightbox" onclick="this.classList.remove('open')"><img id="lightbox-img" src="" alt=""></div>
 <div id="topbar">
-<div class="logo">Motorola Solutions — APX Portable Accessory Catalog</div>
-<div class="nav-links"><a href="#">Home</a><a href="#">My List</a></div>
+<div id="topbar-left">
+<img src="https://dlun1971.github.io/pcr-catalog/assets/images/motorola-solutions-logo.png" style="width:28px;height:28px;object-fit:contain">
+<span id="brand">APX Portable Accessory Catalog</span>
 </div>
+<div style="display:flex;align-items:center;gap:8px">
+<div style="position:relative;display:flex;align-items:center;border:1px solid rgba(255,255,255,0.35);border-radius:20px;padding:0 16px;gap:7px;cursor:text;height:30px"><input id="search-input" placeholder="Search..." oninput="onSearchInput()" style="background:transparent;border:none;outline:none;color:#fff;font-size:12px;width:160px"><span id="search-clear" onclick="clearSearch()" style="display:none;cursor:pointer;color:rgba(255,255,255,0.6);font-size:16px;line-height:1;user-select:none">×</span></div>
+<div id="whatsnew-pill" onclick="toggleWhatsNewPanel()" style="display:flex;align-items:center;gap:7px;border:1px solid rgba(255,255,255,0.35);border-radius:20px;padding:5px 16px;cursor:pointer;color:#fff;font-size:12px;user-select:none">New Products <span id="whatsnew-count" style="background:rgba(255,255,255,0.2);border-radius:10px;padding:1px 7px;font-size:11px;color:#fff">0</span></div>
+<div id="mylist-pill" onclick="toggleMyListPanel()">My List <span id="mylist-count">0</span></div>
+<a href="https://shop.motorolasolutions.com/shop-two-way-radio-accessories/category/Accessories" target="_blank" style="display:flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,0.35);border-radius:20px;padding:5px 14px;color:#fff;font-size:12px;text-decoration:none;user-select:none" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='transparent'">Shop</a>
+<a href="https://dlun1971.github.io/apx-catalog/index.html" style="display:flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,0.35);border-radius:20px;padding:5px 14px;color:#fff;font-size:12px;text-decoration:none;user-select:none" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='transparent'">Home</a>
+</div></div>
 <div id="radio-panel">
-<div class="pill-group-label">APX N-Line</div>
-<div class="pill-row">
-<div class="rpill" onclick="selectRadio(this,'apx-next')" data-key="apx-next">APX NEXT</div>
-<div class="rpill" onclick="selectRadio(this,'apx-n70')" data-key="apx-n70">APX N70</div>
-<div class="rpill" onclick="selectRadio(this,'apx-n50')" data-key="apx-n50">APX N50</div>
+<div class="panel-label">APX N-Line</div>
+<div class="pill-row" id="nline-pills"></div>
+<div class="panel-label" style="margin-top:8px">Classic APX</div>
+<div class="pill-row" id="classic-pills"></div>
+<div class="panel-label" style="margin-top:8px">SRX Series</div>
+<div class="pill-row" id="srx-pills"></div>
+<div id="variant-strip"><div class="panel-label" style="margin-top:6px">Variant</div><div id="variant-pills-row"></div></div>
+<div id="variant-info"></div>
 </div>
-<div class="pill-group-label">Classic APX</div>
-<div class="pill-row">
-<div class="rpill" onclick="selectRadio(this,'apx-8000')" data-key="apx-8000">APX 8000</div>
-<div class="rpill" onclick="selectRadio(this,'apx-7000')" data-key="apx-7000">APX 7000</div>
-<div class="rpill" onclick="selectRadio(this,'apx-6000')" data-key="apx-6000">APX 6000</div>
-<div class="rpill" onclick="selectRadio(this,'apx-compact')" data-key="apx-compact">APX Compact</div>
-</div>
-<div class="pill-group-label">SRX Series</div>
-<div class="pill-row">
-<div class="rpill" onclick="selectRadio(this,'apx-srx2200')" data-key="apx-srx2200">SRX2200</div>
-</div>
-<div id="variant-strip"><div class="vstrip-label">Variant</div><div id="variant-pills"></div></div>
-</div>
+<div id="page-wrap">
+<div id="radio-sidebar">
+<img id="sidebar-img" class="hidden" src="" alt="">
+<div id="sidebar-placeholder">No image</div>
+<div id="sidebar-name"></div>
+<div id="sidebar-type">Portable Radio</div>
+<div id="sidebar-acc" style="display:none;margin-top:16px;text-align:center">
+<img id="sidebar-acc-img" src="" style="width:160px;height:160px;object-fit:contain;cursor:zoom-in" onclick="openLightbox(this.src)" alt="">
+<div id="sidebar-acc-desc" style="font-size:11px;color:#444;margin-top:8px;padding:0 8px;line-height:1.4"></div>
+<div id="sidebar-acc-pn" style="font-size:11px;font-family:monospace;color:#888;margin-top:4px"></div>
+<div id="sidebar-acc-back" onclick="restoreRadioSidebar()" style="margin-top:10px;font-size:11px;color:#185FA5;cursor:pointer">← Back to radio</div>
+</div></div>
+<div id="main-col">
 <div id="content-area">
 <div id="cat-bar"></div>
-<div id="toolbar"><div id="breadcrumb">Select a radio to begin</div><input id="search-box" type="text" placeholder="Search part # or description..." oninput="renderTables()"></div>
-<div id="no-radio"><h3>APX Portable Accessory Catalog</h3><p>Select a radio family above to view compatible accessories.</p></div>
-<div id="tables-area"></div>
-</div>
+<div id="toolbar"><span id="breadcrumb"><b>Select a radio</b></span></div>
+<div id="table-area"></div>
+</div></div></div>
+<div id="whatsnew-overlay" onclick="closeWhatsNewPanel()" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.3);z-index:200"></div>
+<div id="whatsnew-panel" style="display:none;position:fixed;top:0;right:0;width:400px;height:100%;background:#fff;z-index:201;box-shadow:-4px 0 20px rgba(0,0,0,0.15);flex-direction:column">
+<div style="background:#0C2D5A;padding:16px 20px;display:flex;align-items:center;justify-content:space-between"><span style="color:#fff;font-size:15px;font-weight:500">New Products</span><span onclick="closeWhatsNewPanel()" style="color:rgba(255,255,255,0.7);cursor:pointer;font-size:20px;line-height:1">&times;</span></div>
+<div id="whatsnew-items" style="flex:1;overflow-y:auto;padding:12px 16px"></div></div>
+<div id="mylist-overlay" onclick="closeMyListPanel()" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.3);z-index:200"></div>
+<div id="mylist-panel" style="display:none;position:fixed;top:0;right:0;width:360px;height:100%;background:#fff;z-index:201;box-shadow:-4px 0 20px rgba(0,0,0,0.15);flex-direction:column">
+<div style="background:#0C2D5A;padding:16px 20px;display:flex;align-items:center;justify-content:space-between"><span style="color:#fff;font-size:15px;font-weight:500">My List</span><span onclick="closeMyListPanel()" style="color:rgba(255,255,255,0.7);cursor:pointer;font-size:20px;line-height:1">&times;</span></div>
+<div id="mylist-items" style="flex:1;overflow-y:auto;padding:12px 16px"></div>
+<div style="padding:12px 16px;border-top:1px solid #e0e0e0;display:flex;gap:8px">
+<button onclick="clearMyList()" style="flex:1;padding:8px;border:1px solid #ccc;border-radius:4px;background:#fff;color:#555;font-size:12px;cursor:pointer">Clear All</button>
+<button onclick="generateReport()" style="flex:2;padding:8px;border:none;border-radius:4px;background:#0C2D5A;color:#fff;font-size:12px;font-weight:500;cursor:pointer">Generate Report</button>
+</div></div>
 <script src="data/apx-next-data.js"></script>
 <script src="data/apx-n70-data.js"></script>
 <script src="data/apx-n50-data.js"></script>
@@ -95,69 +128,84 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-siz
 <script src="data/apx-compact-data.js"></script>
 <script src="data/apx-srx2200-data.js"></script>
 <script>
-var APX_RADIOS = {
-  "apx-next":    {label:"APX NEXT",    variants:[],                                      dataVar:"APX_NEXT_DATA"},
-  "apx-n70":     {label:"APX N70",     variants:[],                                      dataVar:"APX_N70_DATA"},
-  "apx-n50":     {label:"APX N50",     variants:[],                                      dataVar:"APX_N50_DATA"},
-  "apx-8000":    {label:"APX 8000",    variants:["8000","8000XE","8000H","8000HXE"],     dataVar:"APX_8000_DATA"},
-  "apx-7000":    {label:"APX 7000",    variants:["7000","7000XE"],                       dataVar:"APX_7000_DATA"},
-  "apx-6000":    {label:"APX 6000",    variants:["6000","6000XE","5000"],                dataVar:"APX_6000_DATA"},
-  "apx-compact": {label:"APX Compact", variants:["4000","3000","2000","1000","1000i","900"], dataVar:"APX_COMPACT_DATA"},
-  "apx-srx2200": {label:"SRX2200",     variants:[],                                      dataVar:"APX_SRX2200_DATA"}
+var NLINE_RADIOS = [{label:"APX NEXT",key:"apx-next"},{label:"APX N70",key:"apx-n70"},{label:"APX N50",key:"apx-n50"}];
+var CLASSIC_RADIOS = [{label:"APX 8000",key:"apx-8000"},{label:"APX 7000",key:"apx-7000"},{label:"APX 6000",key:"apx-6000"},{label:"APX Compact",key:"apx-compact"}];
+var SRX_RADIOS = [{label:"SRX2200",key:"apx-srx2200"}];
+var ALL_RADIOS = NLINE_RADIOS.concat(CLASSIC_RADIOS).concat(SRX_RADIOS);
+var RADIO_VARIANTS = {
+  "apx-8000":["8000","8000XE","8000H","8000HXE"],
+  "apx-7000":["7000","7000XE"],
+  "apx-6000":["6000","6000XE","5000"],
+  "apx-compact":["4000","3000","2000","1000","1000i","900"]
 };
-var APX_CATS = ["RSM","Surveillance","Headsets","Tactical","Wireless","Batteries","Chargers","Carry","Antennas","Cables"];
+var RADIO_IMAGES = {
+  "apx-next":"https://www.motorolasolutions.com/content/dam/msi/images/products/two-way-radios/apx/portable-radios/apx-next/apx_next_front.png",
+  "apx-n70":"https://www.motorolasolutions.com/content/dam/msi/images/products/two-way-radios/apx/portable-radios/apx-n70/apx_n70_front.png",
+  "apx-n50":"https://www.motorolasolutions.com/content/dam/msi/images/products/two-way-radios/apx/portable-radios/apx-n50/apx_n50_front.png",
+  "apx-8000":"https://www.motorolasolutions.com/content/dam/msi/images/products/two-way-radios/apx/portable-radios/apx8000/apx_8000_front.png",
+  "apx-7000":"https://www.motorolasolutions.com/content/dam/msi/images/products/two-way-radios/apx/portable-radios/apx7000/apx_7000_front.png",
+  "apx-6000":"https://www.motorolasolutions.com/content/dam/msi/images/products/two-way-radios/apx/portable-radios/apx6000/apx_6000_front.png",
+  "apx-compact":"https://www.motorolasolutions.com/content/dam/msi/images/products/two-way-radios/apx/portable-radios/apx4000/apx_4000_front.png",
+  "apx-srx2200":"https://www.motorolasolutions.com/content/dam/msi/images/products/two-way-radios/apx/portable-radios/srx2200/srx_2200_front.png"
+};
+var APX_CATS = ["All","RSM","Surveillance","Headsets","Tactical","Wireless","Batteries","Chargers","Carry","Antennas","Cables"];
 var COLS_BY_SECTION = {
-  RSM:          ["img","desc","part","impres","multi_mic","viqi","vol_ctrl","orange_btn","ch_ctrl","prog_btn","audio_jack","ip","hazloc","dims_mm"],
-  Surveillance: ["img","desc","part","impres","ear_type","mic_type","ptt","prog_btn","hazloc"],
-  Headsets:     ["img","desc","part","impres","headset_type","ear_style","nrr_db","mic_type","hazloc"],
-  Tactical:     ["img","desc","part","impres","hazloc"],
-  Wireless:     ["img","desc","part","ear_type","mic_type","ptt","talk_time_hr","charge_time_hr","weight_g"],
-  Batteries:    ["img","desc","part","impres","chem","capacity_mah","dims_mm","weight_g","hazloc","ip","op_temp"],
-  Chargers:     ["img","desc","part","impres","chem","pwr_src","dims_mm","pockets"],
-  Carry:        ["img","desc","part","material","belt_sz","swivel","d_rings"],
-  Antennas:     ["desc","part","band","freq_mhz","len_cm","ant_type"],
-  Cables:       ["desc","part"]
+  "RSM":         [{key:"impres",label:"IMPRES"},{key:"multi_mic",label:"Multi-Mic"},{key:"viqi",label:"ViQi"},{key:"vol_ctrl",label:"Vol Ctrl"},{key:"orange_btn",label:"Orange Btn"},{key:"ch_ctrl",label:"Ch Ctrl"},{key:"prog_btn",label:"Prog Btn"},{key:"audio_jack",label:"Audio Jack"},{key:"ip",label:"IP"},{key:"hazloc",label:"HazLoc"},{key:"dims_mm",label:"Dims (mm)"}],
+  "Surveillance":[{key:"impres",label:"IMPRES"},{key:"ear_type",label:"Ear Type"},{key:"mic_type",label:"Mic Type"},{key:"ptt",label:"PTT"},{key:"hazloc",label:"HazLoc"}],
+  "Headsets":    [{key:"impres",label:"IMPRES"},{key:"headset_type",label:"Type"},{key:"ear_style",label:"Ear Style"},{key:"nrr_db",label:"NRR dB"},{key:"mic_type",label:"Mic"},{key:"hazloc",label:"HazLoc"}],
+  "Tactical":    [{key:"impres",label:"IMPRES"},{key:"hazloc",label:"HazLoc"}],
+  "Wireless":    [{key:"ear_type",label:"Ear Type"},{key:"mic_type",label:"Mic Type"},{key:"ptt",label:"PTT"},{key:"talk_time_hr",label:"Talk (hr)"},{key:"charge_time_hr",label:"Charge (hr)"},{key:"weight_g",label:"Weight (g)"}],
+  "Batteries":   [{key:"impres",label:"IMPRES"},{key:"chem",label:"Chemistry"},{key:"capacity_mah",label:"mAh"},{key:"dims_mm",label:"Dims (mm)"},{key:"weight_g",label:"Weight (g)"},{key:"ip",label:"IP"},{key:"hazloc",label:"HazLoc"},{key:"op_temp",label:"Op Temp"}],
+  "Chargers":    [{key:"impres",label:"IMPRES"},{key:"chem",label:"Chemistry"},{key:"pwr_src",label:"Power"},{key:"dims_mm",label:"Dims (mm)"},{key:"pockets",label:"Pockets"}],
+  "Carry":       [{key:"material",label:"Material"},{key:"belt_sz",label:"Belt Sz"},{key:"swivel",label:"Swivel"},{key:"d_rings",label:"D-Rings"}],
+  "Antennas":    [{key:"band",label:"Band"},{key:"freq_mhz",label:"Freq (MHz)"},{key:"len_cm",label:"Length (cm)"},{key:"ant_type",label:"Type"}],
+  "Cables":      []
 };
-var COL_LABELS = {
-  img:"",desc:"Description",part:"Part #",impres:"IMPRES",
-  multi_mic:"Multi-Mic",viqi:"ViQi",vol_ctrl:"Vol Ctrl",orange_btn:"Orange Btn",
-  ch_ctrl:"Ch Ctrl",prog_btn:"Prog Btn",audio_jack:"Audio Jack",
-  ip:"IP",hazloc:"HazLoc",dims_mm:"Dims (mm)",
-  ear_type:"Ear Type",mic_type:"Mic Type",ptt:"PTT",
-  headset_type:"Type",ear_style:"Ear Style",nrr_db:"NRR dB",
-  talk_time_hr:"Talk (hr)",charge_time_hr:"Charge (hr)",weight_g:"Weight (g)",
-  chem:"Chemistry",capacity_mah:"mAh",op_temp:"Op Temp",
-  pwr_src:"Power",pockets:"Pockets",
-  material:"Material",belt_sz:"Belt Sz",swivel:"Swivel",d_rings:"D-Rings",
-  band:"Band",freq_mhz:"Freq (MHz)",len_cm:"Length (cm)",ant_type:"Type"
-};
-var BOOL_COLS = ["impres","multi_mic","viqi","vol_ctrl","orange_btn","ch_ctrl","audio_jack","swivel","d_rings","ptt"];
+var PART_IMAGES = {};
+fetch("https://dlun1971.github.io/catalog-files/part-images.json").then(function(r){return r.json();}).then(function(data){Object.assign(PART_IMAGES,data);render();});
+var currentRadio = null;
 var currentRadioKey = null;
 var currentVariant = null;
-var currentCat = "RSM";
-function selectRadio(el,key){
-  document.querySelectorAll(".rpill").forEach(function(p){p.classList.remove("active");});
-  el.classList.add("active");
-  currentRadioKey = key;
-  var radio = APX_RADIOS[key];
-  if(radio.variants && radio.variants.length > 1){
-    currentVariant = radio.variants[0];
-    buildVariantStrip(radio.variants);
-  } else {
-    currentVariant = null;
-    document.getElementById("variant-strip").style.display = "none";
-  }
-  currentCat = "RSM";
-  document.getElementById("no-radio").style.display = "none";
-  document.getElementById("cat-bar").style.display = "flex";
-  document.getElementById("toolbar").style.display = "flex";
-  buildCatBar();
-  renderTables();
+var currentCat = "All";
+var myList = [];
+function init(){
+  buildPillGroup("nline-pills", NLINE_RADIOS);
+  buildPillGroup("classic-pills", CLASSIC_RADIOS);
+  buildPillGroup("srx-pills", SRX_RADIOS);
+  selectRadio("APX NEXT","apx-next");
 }
-function buildVariantStrip(variants){
+function buildPillGroup(id, radios){
+  var row = document.getElementById(id);
+  row.innerHTML = "";
+  for(var i=0;i<radios.length;i++){
+    var r = radios[i];
+    var d = document.createElement("div");
+    d.className = "rpill" + (r.key===currentRadioKey?" active":"");
+    d.textContent = r.label;
+    d.onclick = (function(lbl,k){return function(){selectRadio(lbl,k);};})(r.label,r.key);
+    row.appendChild(d);
+  }
+}
+function selectRadio(label,key){
+  currentRadio = label;
+  currentRadioKey = key;
+  currentCat = "All";
+  currentVariant = null;
+  buildPillGroup("nline-pills",NLINE_RADIOS);
+  buildPillGroup("classic-pills",CLASSIC_RADIOS);
+  buildPillGroup("srx-pills",SRX_RADIOS);
+  buildVariantStrip(key);
+  buildCatBar();
+  updateSidebar();
+  render();
+}
+function buildVariantStrip(key){
   var strip = document.getElementById("variant-strip");
-  var pillsDiv = document.getElementById("variant-pills");
-  pillsDiv.innerHTML = "";
+  var row = document.getElementById("variant-pills-row");
+  var variants = RADIO_VARIANTS[key];
+  if(!variants||!variants.length){strip.style.display="none";return;}
+  row.innerHTML = "";
+  currentVariant = variants[0];
   for(var i=0;i<variants.length;i++){
     var v = variants[i];
     var d = document.createElement("div");
@@ -165,16 +213,14 @@ function buildVariantStrip(variants){
     d.textContent = v;
     d.setAttribute("data-v",v);
     d.onclick = (function(vv){return function(){selectVariant(vv);};})(v);
-    pillsDiv.appendChild(d);
+    row.appendChild(d);
   }
   strip.style.display = "block";
 }
 function selectVariant(v){
   currentVariant = v;
-  document.querySelectorAll(".vpill").forEach(function(p){
-    p.classList.toggle("active",p.getAttribute("data-v")===v);
-  });
-  renderTables();
+  document.querySelectorAll(".vpill").forEach(function(p){p.classList.toggle("active",p.getAttribute("data-v")===v);});
+  render();
 }
 function buildCatBar(){
   var bar = document.getElementById("cat-bar");
@@ -182,121 +228,180 @@ function buildCatBar(){
   for(var i=0;i<APX_CATS.length;i++){
     var c = APX_CATS[i];
     var d = document.createElement("div");
-    d.className = "catpill"+(c===currentCat?" active":"");
+    d.className = "cpill"+(c===currentCat?" active":"");
     d.textContent = c;
-    d.setAttribute("data-c",c);
-    d.onclick = (function(cc){return function(){selectCat(cc);};})(c);
+    d.onclick = (function(cc){return function(){currentCat=cc;buildCatBar();render();};})(c);
     bar.appendChild(d);
   }
 }
-function selectCat(c){
-  currentCat = c;
-  document.querySelectorAll(".catpill").forEach(function(p){
-    p.classList.toggle("active",p.getAttribute("data-c")===c);
-  });
-  renderTables();
+function updateSidebar(){
+  var img = document.getElementById("sidebar-img");
+  var ph = document.getElementById("sidebar-placeholder");
+  var name = document.getElementById("sidebar-name");
+  var url = RADIO_IMAGES[currentRadioKey];
+  name.textContent = currentRadio||"";
+  if(url){img.src=url;img.classList.remove("hidden");ph.style.display="none";}
+  else{img.classList.add("hidden");ph.style.display="flex";}
+  document.getElementById("sidebar-acc").style.display="none";
 }
 function getData(){
-  var radio = APX_RADIOS[currentRadioKey];
-  var raw = window[radio.dataVar];
+  var varMap = {"apx-next":"APX_NEXT_DATA","apx-n70":"APX_N70_DATA","apx-n50":"APX_N50_DATA","apx-8000":"APX_8000_DATA","apx-7000":"APX_7000_DATA","apx-6000":"APX_6000_DATA","apx-compact":"APX_COMPACT_DATA","apx-srx2200":"APX_SRX2200_DATA"};
+  var raw = window[varMap[currentRadioKey]];
   if(!raw) return [];
   if(Array.isArray(raw)) return raw;
   if(raw.categories){
-    var flat = [];
-    var cats = Object.keys(raw.categories);
+    var flat=[];
+    var cats=Object.keys(raw.categories);
     for(var i=0;i<cats.length;i++){
-      var catName = cats[i];
-      var rows = raw.categories[catName];
-      for(var j=0;j<rows.length;j++){
-        var rowObj = rows[j];
-        rowObj.category = catName;
-        flat.push(rowObj);
-      }
+      var cn=cats[i];var rows=raw.categories[cn];
+      for(var j=0;j<rows.length;j++){rows[j].category=cn;flat.push(rows[j]);}
     }
     return flat;
   }
   return [];
 }
-function getVariantsForRadio(){
-  var radio = APX_RADIOS[currentRadioKey];
-  var raw = window[radio.dataVar];
-  if(raw && raw.variants && raw.variants.length > 0) return raw.variants;
-  return radio.variants || [];
-}
 function matchesVariant(row){
   if(!currentVariant) return true;
-  if(!row.variants || row.variants.length === 0) return true;
-  for(var i=0;i<row.variants.length;i++){
-    if(row.variants[i]===currentVariant) return true;
-  }
+  if(!row.variants||!row.variants.length) return true;
+  for(var i=0;i<row.variants.length;i++){if(row.variants[i]===currentVariant)return true;}
   return false;
 }
-function renderCellVal(col,val){
-  if(col==="img"){
-    if(val) return "<img class=\"thumb\" src=\""+val+"\" loading=\"lazy\">";
-    return "<span class=\"thumb-empty\"></span>";
-  }
-  if(BOOL_COLS.indexOf(col)>=0){
-    if(val===true||val===1||val==="1"||val==="yes") return "<span class=\"chk\">✔</span>";
-    return "<span class=\"x\">—</span>";
-  }
-  if(col==="ip") return val?"<span class=\"badge badge-ip\">"+val+"</span>":"<span class=\"x\">—</span>";
-  if(col==="hazloc") return val?"<span class=\"badge badge-hz\">"+val+"</span>":"<span class=\"x\">—</span>";
-  if(val===null||val===undefined||val==="") return "<span class=\"x\">—</span>";
-  return val;
-}
-function renderTables(){
-  if(!currentRadioKey) return;
-  var radio = APX_RADIOS[currentRadioKey];
-  var searchVal = (document.getElementById("search-box").value||"").toLowerCase();
-  var allData = getData();
-  var cols = COLS_BY_SECTION[currentCat]||["desc","part"];
-  var rows = [];
-  for(var i=0;i<allData.length;i++){
-    var row = allData[i];
-    if(row.category !== currentCat) continue;
-    if(!matchesVariant(row)) continue;
-    if(searchVal){
-      var hay=((row.desc||"")+" "+(row.part||"")).toLowerCase();
-      if(hay.indexOf(searchVal)<0) continue;
-    }
-    rows.push(row);
-  }
+function render(){
+  var area = document.getElementById("table-area");
+  var search = document.getElementById("search-input").value.toLowerCase().trim();
+  if(search.length>0){renderGlobalSearch(search,area);return;}
   var bc = document.getElementById("breadcrumb");
-  bc.innerHTML = "<span>"+radio.label+"</span> › "+currentCat+(currentVariant?" › "+currentVariant:"");
-  var area = document.getElementById("tables-area");
-  if(rows.length===0){
-    area.innerHTML = "<div style=\"padding:40px 0;text-align:center;color:#889\">No accessories found for this selection.</div>";
-    return;
+  bc.innerHTML = (currentRadio||"") + " › <b>" + currentCat + "</b>";
+  var allData = getData();
+  if(!allData.length){area.innerHTML="<div class='no-items'>No data available for this radio.</div>";return;}
+  var sections = [];
+  var catsToShow = currentCat==="All" ? APX_CATS.filter(function(c){return c!=="All";}) : [currentCat];
+  for(var ci=0;ci<catsToShow.length;ci++){
+    var cat = catsToShow[ci];
+    var items = allData.filter(function(r){return r.category===cat && matchesVariant(r);});
+    if(items.length) sections.push({name:cat,items:items,cols:COLS_BY_SECTION[cat]||[]});
   }
-  var html = "<div class=\"section-block\">";
-  html += "<div class=\"section-title\">"+currentCat+"</div>";
-  html += "<table class=\"acc-table\"><thead><tr>";
-  for(var ci=0;ci<cols.length;ci++){
-    var ckey=cols[ci];
-    var isC=BOOL_COLS.indexOf(ckey)>=0||ckey==="ip"||ckey==="hazloc"||ckey==="img";
-    html += "<th"+(isC?" class=\"center\"":"")+">"+( COL_LABELS[ckey]!==undefined?COL_LABELS[ckey]:ckey)+"</th>";
+  if(!sections.length){area.innerHTML="<div class='no-items'>No accessories found.</div>";return;}
+  area.innerHTML = buildSectionsHTML(sections);
+}
+function renderGlobalSearch(search,area){
+  var total=0;var html="";
+  for(var ri=0;ri<ALL_RADIOS.length;ri++){
+    var r=ALL_RADIOS[ri];
+    var saved=currentRadioKey;currentRadioKey=r.key;
+    var allData=getData();currentRadioKey=saved;
+    var items=allData.filter(function(row){return((row.desc||"")+" "+(row.part||"")).toLowerCase().indexOf(search)>=0;});
+    if(!items.length) continue;
+    total+=items.length;
+    html+="<div class='sec-head' style='background:#f0f4fa;padding:8px 10px;border-radius:4px;margin-top:16px;color:#0C2D5A;font-size:12px;font-weight:600;text-transform:none;letter-spacing:0'>"+r.label+" <span class='sec-count'>— "+items.length+" item"+(items.length!==1?"s":"")+"</span></div>";
+    var grouped={};
+    for(var ii=0;ii<items.length;ii++){var cat=items[ii].category||"Other";if(!grouped[cat])grouped[cat]=[];grouped[cat].push(items[ii]);}
+    var gkeys=Object.keys(grouped);
+    for(var gi=0;gi<gkeys.length;gi++){html+=buildSectionsHTML([{name:gkeys[gi],items:grouped[gkeys[gi]],cols:COLS_BY_SECTION[gkeys[gi]]||[]}]);}
   }
-  html += "</tr></thead><tbody>";
-  for(var ri=0;ri<rows.length;ri++){
-    var r=rows[ri];
-    html += "<tr>";
-    for(var ci2=0;ci2<cols.length;ci2++){
-      var ck=cols[ci2];
-      var isC2=BOOL_COLS.indexOf(ck)>=0||ck==="ip"||ck==="hazloc"||ck==="img";
-      if(ck==="part") html += "<td class=\"part center\" onclick=\"copyPart(this)\">"+( r.part||"")+"</td>";
-      else if(ck==="desc") html += "<td style=\"min-width:200px\">"+( r.desc||"")+"</td>";
-      else html += "<td"+(isC2?" class=\"center\"":"")+">"+renderCellVal(ck,r[ck])+"</td>";
+  var bc=document.getElementById("breadcrumb");
+  bc.innerHTML=total?"Search: <b>""+search+""</b> › "+total+" result"+(total!==1?"s":""):"Search: <b>""+search+""</b> › No results";
+  area.innerHTML=total?html:"<div class='no-items'>No accessories found matching ""+search+"".</div>";
+}
+function buildSectionsHTML(sections){
+  var html="";
+  for(var si=0;si<sections.length;si++){
+    var sec=sections[si];
+    var cols=sec.cols||[];
+    html+="<div class='sec-head'>"+sec.name+" <span class='sec-count'>— "+sec.items.length+" item"+(sec.items.length!==1?"s":"")+"</span></div>";
+    html+="<table class='acc-table'><thead><tr>";
+    html+="<th style='width:42px'></th><th>Description</th><th>Part #</th>";
+    for(var ci=0;ci<cols.length;ci++){html+="<th style='text-align:center'>"+(cols[ci].label||cols[ci])+"</th>";}
+    html+="<th style='width:36px'></th></tr></thead><tbody>";
+    for(var ii=0;ii<sec.items.length;ii++){
+      var item=sec.items[ii];
+      var pn=item.part||item.pn||"";
+      var desc=item.desc||item.description||"";
+      var inList=myList.indexOf(pn)>=0;
+      var thumbUrl=PART_IMAGES[pn]||"";
+      if(!thumbUrl){var base=pn.replace(/[A-D]$/,"").replace(/0[1-4]$/,"");if(base!==pn)thumbUrl=PART_IMAGES[base]||"";}
+      if(!thumbUrl){var sfx=["A","B","C","D","01","02","03","04"];for(var si2=0;si2<sfx.length;si2++){if(PART_IMAGES[pn+sfx[si2]]){thumbUrl=PART_IMAGES[pn+sfx[si2]];break;}}}
+      html+="<tr style='cursor:pointer' onclick='showAccSidebar(""+pn+"",""+desc.replace(/"/g," ")+"")' >";
+      html+="<td>"+(thumbUrl?"<img src='"+thumbUrl+"' style='width:34px;height:34px;object-fit:contain;border-radius:4px;border:0.5px solid #e0e0e0'>":"<div class='img-box'></div>")+"</td>";
+      html+="<td>"+desc+"</td>";
+      html+="<td class='pn' title='Click to copy' style='cursor:pointer' onclick='copyPN(this,""+pn+"")'>"+pn+"</td>";
+      for(var ci2=0;ci2<cols.length;ci2++){
+        var ck=cols[ci2].key||cols[ci2];
+        var v=item[ck];
+        if(v===true) html+="<td class='chk-yes'>&#10003;</td>";
+        else if(v===false||v===null||v===undefined||v==="") html+="<td class='chk-no'>—</td>";
+        else if(ck==="ip") html+="<td><span class='spec-tag tag-ip'>"+v+"</span></td>";
+        else if(ck==="hazloc") html+="<td>"+(v==="UL"?"<span class='spec-tag tag-ul'>UL</span>":v==="ATEX"?"<span class='spec-tag tag-atex'>ATEX</span>":"<span class='spec-tag tag-hz'>"+v+"</span>")+"</td>";
+        else html+="<td>"+v+"</td>";
+      }
+      html+="<td><input type='checkbox' class='row-cb'"+(inList?" checked":"")+" onchange='toggleItem(""+pn+"",this.checked)'></td>";
+      html+="</tr>";
     }
-    html += "</tr>";
+    html+="</tbody></table>";
   }
-  html += "</tbody></table></div>";
-  area.innerHTML = html;
+  return html;
 }
-function copyPart(el){
-  if(navigator.clipboard) navigator.clipboard.writeText(el.textContent);
-  el.style.background="#d1fae5";
-  setTimeout(function(){el.style.background="";},600);
+function showAccSidebar(pn,desc){
+  var url=PART_IMAGES[pn]||"";
+  document.getElementById("sidebar-img").classList.add("hidden");
+  document.getElementById("sidebar-placeholder").style.display="none";
+  document.getElementById("sidebar-name").textContent="";
+  var acc=document.getElementById("sidebar-acc");
+  var accImg=document.getElementById("sidebar-acc-img");
+  acc.style.display="block";
+  accImg.src=url;accImg.style.display=url?"block":"none";
+  document.getElementById("sidebar-acc-desc").textContent=desc||"";
+  document.getElementById("sidebar-acc-pn").textContent=pn||"";
 }
+function restoreRadioSidebar(){document.getElementById("sidebar-acc").style.display="none";updateSidebar();}
+function openLightbox(src){document.getElementById("lightbox-img").src=src;document.getElementById("lightbox").classList.add("open");}
+function onSearchInput(){var q=document.getElementById("search-input").value;document.getElementById("search-clear").style.display=q?"inline":"none";render();}
+function clearSearch(){document.getElementById("search-input").value="";document.getElementById("search-clear").style.display="none";render();}
+function toggleItem(pn,checked){if(checked&&myList.indexOf(pn)<0)myList.push(pn);else if(!checked)myList=myList.filter(function(p){return p!==pn;});document.getElementById("mylist-count").textContent=myList.length;}
+function copyPN(el,pn){navigator.clipboard&&navigator.clipboard.writeText(pn);var orig=el.textContent;el.textContent="Copied!";el.style.color="#1D9E75";setTimeout(function(){el.textContent=orig;el.style.color="";},1200);}
+function findItemByPN(pn){
+  for(var ri=0;ri<ALL_RADIOS.length;ri++){
+    var saved=currentRadioKey;currentRadioKey=ALL_RADIOS[ri].key;
+    var data=getData();currentRadioKey=saved;
+    for(var i=0;i<data.length;i++){if((data[i].part||data[i].pn)===pn)return data[i];}
+  }
+  return null;
+}
+function toggleMyListPanel(){var p=document.getElementById("mylist-panel");var o=document.getElementById("mylist-overlay");if(p.style.display==="flex"){closeMyListPanel();return;}renderMyListPanel();p.style.display="flex";o.style.display="block";}
+function closeMyListPanel(){document.getElementById("mylist-panel").style.display="none";document.getElementById("mylist-overlay").style.display="none";}
+function renderMyListPanel(){
+  var c=document.getElementById("mylist-items");
+  if(!myList.length){c.innerHTML="<div style='color:#aaa;font-size:13px;text-align:center;padding:40px 0'>No items selected</div>";return;}
+  var html="";
+  for(var i=0;i<myList.length;i++){
+    var pn=myList[i];var item=findItemByPN(pn)||{};var thumb=PART_IMAGES[pn]||"";
+    html+="<div style='display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:0.5px solid #f0f0f0'>";
+    html+=thumb?"<img src='"+thumb+"' style='width:40px;height:40px;object-fit:contain;border-radius:4px;border:0.5px solid #e0e0e0;flex-shrink:0'>":"<div style='width:40px;height:40px;background:#f5f5f5;border-radius:4px;flex-shrink:0'></div>";
+    html+="<div style='flex:1;min-width:0'><div style='font-family:monospace;font-size:11px;color:#888'>"+pn+"</div><div style='font-size:12px;color:#222;margin-top:2px;line-height:1.3'>"+(item.desc||item.description||"")+"</div></div>";
+    html+="<span onclick='removeFromList(""+pn+"")' style='color:#ccc;cursor:pointer;font-size:18px;flex-shrink:0'>&times;</span></div>";
+  }
+  c.innerHTML=html;
+}
+function removeFromList(pn){myList=myList.filter(function(p){return p!==pn;});document.getElementById("mylist-count").textContent=myList.length;renderMyListPanel();render();}
+function clearMyList(){myList=[];document.getElementById("mylist-count").textContent=0;renderMyListPanel();render();}
+function generateReport(){
+  if(!myList.length) return;
+  var rows=myList.map(function(pn){var item=findItemByPN(pn)||{};return{pn:pn,desc:item.desc||item.description||"",item:item};});
+  var win=window.open("","_blank");
+  var date=new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});
+  var h="<!DOCTYPE html><html><head><meta charset='UTF-8'><title>APX Accessory Report</title>";
+  h+="<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Arial,sans-serif;font-size:12px;color:#222;padding:24px}table{width:100%;border-collapse:collapse;margin-top:16px}th{background:#0C2D5A;color:#fff;padding:8px 10px;text-align:left;font-size:11px}td{padding:8px 10px;border-bottom:0.5px solid #e0e0e0;vertical-align:middle}.pn{font-family:monospace;font-size:11px;color:#555}.header{display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #185FA5;padding-bottom:12px;margin-bottom:20px}.meta{font-size:11px;color:#888}img.thumb{width:36px;height:36px;object-fit:contain}@media print{body{padding:12px}}</style></head><body>";
+  h+="<div class='header'><img src='https://dlun1971.github.io/pcr-catalog/assets/images/motorola-solutions-logo.png' style='height:36px'><h1 style='margin-left:12px;font-size:18px;color:#0C2D5A'>APX Accessory Report</h1><div class='meta'>Generated: "+date+"<br>"+rows.length+" item"+(rows.length!==1?"s":"")+" selected</div></div>";
+  h+="<table><thead><tr><th></th><th>Part #</th><th>Description</th><th>IP</th><th>HazLoc</th><th>IMPRES</th></tr></thead><tbody>";
+  for(var i=0;i<rows.length;i++){var r=rows[i];var thumb=PART_IMAGES[r.pn]?"<img class='thumb' src='"+PART_IMAGES[r.pn]+"'>":"";h+="<tr><td>"+thumb+"</td><td class='pn'>"+r.pn+"</td><td>"+r.desc+"</td><td>"+(r.item.ip||"")+"</td><td>"+(r.item.hazloc||"")+"</td><td>"+(r.item.impres?"Yes":"")+"</td></tr>";}
+  h+="</tbody></table></body></html>";
+  win.document.write(h);win.document.close();
+}
+var WHATS_NEW=[];
+fetch("https://dlun1971.github.io/catalog-files/whats-new-apx.json").then(function(r){return r.json();}).then(function(data){WHATS_NEW.push.apply(WHATS_NEW,data);var wc=document.getElementById("whatsnew-count");wc.textContent=data.length;if(data.length>0)wc.classList.add("pulsing");}).catch(function(){});
+function toggleWhatsNewPanel(){document.getElementById("whatsnew-count").classList.remove("pulsing");var p=document.getElementById("whatsnew-panel");var o=document.getElementById("whatsnew-overlay");if(p.style.display==="flex"){closeWhatsNewPanel();return;}renderWhatsNewPanel();p.style.display="flex";o.style.display="block";}
+function closeWhatsNewPanel(){document.getElementById("whatsnew-panel").style.display="none";document.getElementById("whatsnew-overlay").style.display="none";}
+function renderWhatsNewPanel(){var c=document.getElementById("whatsnew-items");if(!WHATS_NEW.length){c.innerHTML="<div style='color:#aaa;font-size:13px;text-align:center;padding:40px 0'>No new accessories</div>";return;}var html="";for(var i=0;i<WHATS_NEW.length;i++){var item=WHATS_NEW[i];var thumb=item.img||PART_IMAGES[item.pn]||"";html+="<div style='display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:0.5px solid #f0f0f0'>"+(thumb?"<img src='"+thumb+"' style='width:44px;height:44px;object-fit:contain;border-radius:4px;border:0.5px solid #e0e0e0;flex-shrink:0'>":"<div style='width:44px;height:44px;background:#f5f5f5;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#ccc;font-size:10px'>No img</div>")+"<div style='flex:1;min-width:0'><div style='display:flex;align-items:center;gap:6px;margin-bottom:2px'><span style='font-family:monospace;font-size:11px;color:#888'>"+item.pn+"</span>"+(item.radio?"<span style='font-size:10px;background:#e8f0fb;color:#0C2D5A;border-radius:4px;padding:1px 6px'>"+item.radio+"</span>":"")+(item.added?"<span style='font-size:10px;color:#bbb;margin-left:auto'>"+item.added+"</span>":"")+"</div><div style='font-size:12px;color:#222;line-height:1.3'>"+(item.desc||"")+"</div></div></div>";}c.innerHTML=html;}
+window.addEventListener("DOMContentLoaded", init);
 </script>
 </body></html>
