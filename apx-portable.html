@@ -378,13 +378,14 @@ function renderMyListPanel(){
   for(var i=0;i<myList.length;i++){
     var pn=myList[i];var item=findItemByPN(pn)||{};var thumb=PART_IMAGES[pn]||"";
     html+="<div style='display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:0.5px solid #f0f0f0'>";
-    html+=thumb?"<img src='"+thumb+"' style='width:40px;height:40px;object-fit:contain;border-radius:4px;border:0.5px solid #e0e0e0;flex-shrink:0'>":"<div style='width:40px;height:40px;background:#f5f5f5;border-radius:4px;flex-shrink:0'></div>";
+    html+="<span onclick='removeFromList(this)' data-pn='"+pn+"' style='color:#ccc;cursor:pointer;font-size:18px;flex-shrink:0'>&times;</span></div>";
     html+="<div style='flex:1;min-width:0'><div style='font-family:monospace;font-size:11px;color:#888'>"+pn+"</div><div style='font-size:12px;color:#222;margin-top:2px;line-height:1.3'>"+(item.desc||item.description||"")+"</div></div>";
     html+="<span onclick='removeFromList("+pn+")' style='color:#ccc;cursor:pointer;font-size:18px;flex-shrink:0'>&times;</span></div>";
   }
   c.innerHTML=html;
 }
-function removeFromList(pn){myList=myList.filter(function(p){return p!==pn;});document.getElementById("mylist-count").textContent=myList.length;renderMyListPanel();render();}
+function removeFromList(el){var pn=el?el.getAttribute("data-pn")||"":"";
+myList=myList.filter(function(p){return p!==pn;});document.getElementById("mylist-count").textContent=myList.length;renderMyListPanel();render();}
 function clearMyList(){myList=[];document.getElementById("mylist-count").textContent=0;renderMyListPanel();render();}
 function generateReport(){
   if(!myList.length) return;
