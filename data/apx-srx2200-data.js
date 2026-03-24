@@ -2,7 +2,7 @@
 // Variants: SRX 2200 (standalone)
 // Source: APX Radio Accessories Catalog 2026
 
-const APXSRX2200_DATA = {
+const APX_SRX2200_DATA = {
   variants: ["SRX2200"],
 
   "RSM": [
@@ -121,4 +121,4 @@ const APXSRX2200_DATA = {
   ]
 };
 
-if (typeof module !== "undefined") module.exports = APXSRX2200_DATA;
+if (typeof module !== "undefined") module.exports = APX_SRX2200_DATA;
