@@ -249,16 +249,22 @@ function getData(){
   var raw = window[varMap[currentRadioKey]];
   if(!raw) return [];
   if(Array.isArray(raw)) return raw;
+  var CAT_NAMES = ["RSM","Surveillance","Headsets","Tactical","Wireless","Batteries","Chargers","Carry","Antennas","Cables"];
+  var flat=[];
   if(raw.categories){
-    var flat=[];
     var cats=Object.keys(raw.categories);
     for(var i=0;i<cats.length;i++){
       var cn=cats[i];var rows=raw.categories[cn];
-      for(var j=0;j<rows.length;j++){rows[j].category=cn;flat.push(rows[j]);}
+      if(Array.isArray(rows)){for(var j=0;j<rows.length;j++){rows[j].category=cn;flat.push(rows[j]);}}
+      else if(rows && rows.items){for(var j=0;j<rows.items.length;j++){rows.items[j].category=cn;flat.push(rows.items[j]);}}
     }
     return flat;
   }
-  return [];
+  for(var i=0;i<CAT_NAMES.length;i++){
+    var cn=CAT_NAMES[i];var rows=raw[cn];
+    if(Array.isArray(rows)){for(var j=0;j<rows.length;j++){rows[j].category=cn;flat.push(rows[j]);}}
+  }
+  return flat;
 }
 function matchesVariant(row){
   if(!currentVariant) return true;
