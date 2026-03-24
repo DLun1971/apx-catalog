@@ -2,7 +2,7 @@
 // Variants: APX 4000, APX 3000, APX 2000, APX 1000, APX 1000i, APX 900
 // Source: APX Radio Accessories Catalog 2026
 
-const APX_COMPACT_DATA = {
+var APX_COMPACT_DATA = {
   variants: ["4000", "3000", "2000", "1000", "1000i", "900"],
 
   "RSM": [
