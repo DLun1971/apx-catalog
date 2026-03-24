@@ -2,7 +2,7 @@
 // Variants: APX 7000, APX 7000XE
 // Source: APX Radio Accessories Catalog 2026
 
-const APX_7000_DATA = {
+var APX_7000_DATA = {
   variants: ["7000", "7000XE"],
 
   "RSM": [
