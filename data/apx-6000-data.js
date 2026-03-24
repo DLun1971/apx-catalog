@@ -2,7 +2,7 @@
 // Variants: APX 6000, APX 6000XE, APX 5000
 // Source: APX Radio Accessories Catalog 2026
 
-const APX6000_DATA = {
+const APX_6000_DATA = {
   variants: ["6000", "6000XE", "5000"],
 
   "RSM": [
@@ -135,4 +135,4 @@ const APX6000_DATA = {
   ]
 };
 
-if (typeof module !== "undefined") module.exports = APX6000_DATA;
+if (typeof module !== "undefined") module.exports = APX_6000_DATA;
