@@ -257,6 +257,7 @@ function getData(){
       var cn=cats[i];var rows=raw.categories[cn];
       if(Array.isArray(rows)){for(var j=0;j<rows.length;j++){rows[j].category=cn;flat.push(rows[j]);}}
       else if(rows && rows.items){for(var j=0;j<rows.items.length;j++){rows.items[j].category=cn;flat.push(rows.items[j]);}}
+      else if(rows && rows.rows){for(var j=0;j<rows.rows.length;j++){rows.rows[j].category=cn;flat.push(rows.rows[j]);}}
     }
     return flat;
   }
